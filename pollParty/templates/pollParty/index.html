@@ -15,24 +15,28 @@
   <body>
     <div class="container">
         <h1>pollParty</h1>
+        <a href="{% url 'createpoll' %}">Create Poll</a>
         {% for poll in allPolls %}
 
         <div class="row border border-dark">
-
-
           <div class="col-3 text-primary">
+              <!-- Poll Author -->
               {{ poll.firstName }} {{ poll.lastName }}:
           </div>
           <div class="col-5 text-success">
               <strong>
+                  <!-- Poll Text -->
                   {{ poll.pollText }}
               </strong>
           </div>
           <div class="col-2 text-dark">
+              <!-- Poll's Creation Date and Time -->
             <small>{{ poll.pubDate }}</small>
           </div>
           <div class="col-2 text-dark">
+            <!-- Poll Up Votes -->
             <small>👍 {{ poll.upVotes }}</small>
+            <!-- Poll Down Votes -->
             <small>👎 {{ poll.downVotes }}</small>
           </div>
         </div>
