@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>pollParty</title>
+
+      <!-- Copied from Dr. J's Twit -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  </head>
+
+  <body>
+    <div class="container">
+        <h1>pollParty</h1>
+        {% for poll in allPolls %}
+
+        <div class="row border border-dark">
+
+
+          <div class="col-3 text-primary">
+              {{ poll.firstName }} {{ poll.lastName }}:
+          </div>
+          <div class="col-5 text-success">
+              <strong>
+                  {{ poll.pollText }}
+              </strong>
+          </div>
+          <div class="col-2 text-dark">
+            <small>{{ poll.pubDate }}</small>
+          </div>
+          <div class="col-2 text-dark">
+            <small>👍 {{ poll.upVotes }}</small>
+            <small>👎 {{ poll.downVotes }}</small>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
