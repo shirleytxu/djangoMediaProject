@@ -1,6 +1,61 @@
 <!DOCTYPE html>
 <html>
+<style>
+.button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #B6BFCC;
+    border: none;
+    color: #E5DCE0;
+    text-align: center;
+    font-size: 28px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
 
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.buttonpost {
+  border-radius: 25px;
+  border: 2px solid #DFC5BC;
+  padding: 20px;
+  width: 850px;
+  height: 150px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  margin: 5px 2px;
+  cursor: pointer;
+}
+
+.buttonpost:hover {opacity: 1}
+</style>
   <head>
     <title>pollParty</title>
 
@@ -12,35 +67,24 @@
 
   </head>
 
+<!--style="background-image: url('djangobackground.gif');"-->
   <body>
-    <div class="container">
-        <h1>pollParty</h1>
-        <a href="{% url 'createpoll' %}">Create Poll</a>
+    <div class="container" >
+        <h1 style="color: #CEC9E6">pollParty</h1>
+        <button class="button" onclick="http://127.0.0.1:8000/createpoll/" style="vertical-align:middle"><span>Create Poll</span></button><br/>
+
+        <!--<a href="{% url 'createpoll' %}">Create Poll</a>-->
         {% for poll in allPolls %}
 
-        <div class="row border border-dark">
-          <div class="col-3 text-primary">
-              <!-- Poll Author -->
-              {{ poll.firstName }} {{ poll.lastName }}:
-          </div>
-          <div class="col-5 text-success">
-              <strong>
-                  <!-- Poll Text -->
-                  {{ poll.pollText }}
-              </strong>
-          </div>
-          <div class="col-2 text-dark">
-              <!-- Poll's Creation Date and Time -->
-            <small>{{ poll.pubDate }}</small>
-          </div>
-          <div class="col-2 text-dark">
-            <!-- Poll Up Votes -->
-            <small>👍 {{ poll.upVotes }}</small>
+        <button class="buttonpost" href="{ % url 'postDetails' poll.pk % }" style="text-align:left; color: #323B48; font-size: 16px" > {{ poll.firstName }} {{ poll.lastName }} <br/>
+            <span> {{ poll.pubDate }}:</span> <br/>
+            <span style="text-align:center; font-size: 20px;"> {{ poll.pollText }} <br/>
+            </span>
+            <span> <small>👍 {{ poll.upVotes }}</small>
             <!-- Poll Down Votes -->
-            <small>👎 {{ poll.downVotes }}</small>
-          </div>
-        </div>
-      {% endfor %}
+            <small>👎 {{ poll.downVotes }}</small> </span>
+        </button>
+        {% endfor %}
     </div>
   </body>
 </html>

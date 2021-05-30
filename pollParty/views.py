@@ -4,6 +4,15 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import Poll
+from django.views.generic import ListView, DetailView
+
+class Home(ListView):
+    model = Poll
+    template_name = 'index.html'
+
+class postDetailView(DetailView):
+    model = Poll
+    template_name = 'postDetails.html'
 
 def index(request):
     """
@@ -35,6 +44,7 @@ def index(request):
     # Loads Data from Database
     allPolls = Poll.objects.order_by('-pubDate')
 
+    # for
     for poll in allPolls:
         poster = poll.userPosted
         poll.firstName = poster.first_name
@@ -63,3 +73,25 @@ def createPoll(request):
     # Prepares Context
     context = {}      # empty for now
     return HttpResponse(template.render(context, request))
+
+# password = make_password(the password input value from the form)
+# def user
+
+
+"""
+class myView(request):
+    # Just from URL (Get, no data)
+    def get(self, request):
+        if request.method =="GET":
+        # User logged in
+
+        # User not logged in
+
+    # Came from a <form> (POST< with data)
+    def post(self, request):
+        if request.method == "POST":
+        # User logged in
+
+        # user not logged in
+
+"""
