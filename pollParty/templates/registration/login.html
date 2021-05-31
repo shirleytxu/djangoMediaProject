@@ -9,7 +9,7 @@
       <p>Your account doesn't have access to this page. To proceed,
       please login with an account that has access.</p>
     {% else %}
-      <p>Please login to see this page.</p>
+      <p><a href="/login"> Please login to view this page. </a></p>
     {% endif %}
   {% endif %}
 
@@ -25,12 +25,13 @@
         <td>{{ form.password }}</td>
       </tr>
     </table>
+    <p>Don't have an account? Create one <a href="/register">HERE </a></p>
+
     <input type="submit" value="Login" />
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
 
   {# Assumes you setup the password_reset view in your URLconf #}
   <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-
 <button class="button" onclick="location.href = '/'" style="vertical-align:middle"><span>Back</span></button>
 {% endblock %}

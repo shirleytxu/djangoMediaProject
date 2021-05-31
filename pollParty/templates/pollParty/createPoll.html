@@ -1,4 +1,4 @@
-
+{% block content %}
 <!-- Placeholder for now -->
 <h1>Create Poll</h1>
 
@@ -6,5 +6,7 @@
   {% csrf_token %}
   {{ form.as_p }}
   <button>Post</button>
-</form>
+
 <button class="button" onclick="location.href = '/'" style="vertical-align:middle"><span>Back</span></button>
+</form>
+{% endblock %}
