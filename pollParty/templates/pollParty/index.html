@@ -69,14 +69,14 @@
 
 <!--style="background-image: url('djangobackground.gif');"-->
   <body>
-    <div class="container" >
+    <div class="container">
         <h1 style="color: #CEC9E6">pollParty</h1>
-        <button class="button" onclick="http://127.0.0.1:8000/createpoll/" style="vertical-align:middle"><span>Create Poll</span></button><br/>
+        <button class="button" onclick="location.href = '/createpoll/'" style="vertical-align:middle"><span>Create Poll</span></button><br/>
 
         <!--<a href="{% url 'createpoll' %}">Create Poll</a>-->
         {% for poll in allPolls %}
 
-        <button class="buttonpost" href="{% url 'postDetails' poll.pk %}" style="text-align:left; color: #323B48; font-size: 16px" > {{ poll.firstName }} {{ poll.lastName }} <br/>
+        <button class="buttonpost" onclick="location.href = '{% url 'postDetails' poll.pk %}'" style="text-align:left; color: #323B48; font-size: 16px" > {{ poll.firstName }} {{ poll.lastName }} <br/>
             <span> {{ poll.pubDate }}:</span> <br/>
             <span style="text-align:center; font-size: 20px;"> {{ poll.pollText }} <br/>
             </span>

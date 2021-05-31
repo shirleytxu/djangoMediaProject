@@ -7,5 +7,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.index, name="index"),
     path('createpoll/', views.createPoll, name="createpoll"),
-    path('postDetails/<int:pk>', views.postDetailView, name="postDetails")
+    path('postDetails/<int:pk>', views.postDetailView.as_view(), name="postDetails")
 ]

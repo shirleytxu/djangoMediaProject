@@ -4,15 +4,16 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import Poll
-from django.views.generic import ListView, DetailView
-
-class Home(ListView):
-    model = Poll
-    template_name = 'index.html'
+from django.views.generic import DetailView, CreateView
 
 class postDetailView(DetailView):
     model = Poll
-    template_name = 'postDetails.html'
+    template_name = 'pollParty/postDetails.html'
+
+class AddPostView(CreateView):
+    model = Poll
+    template_name = 'createPost.html'
+    fields = '__all__'
 
 def index(request):
     """
