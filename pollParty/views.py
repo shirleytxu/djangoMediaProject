@@ -11,6 +11,12 @@ class PostDetailView(DetailView):
     model = Poll
     template_name = 'pollParty/pollDetails.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(PostDetailView, self).get_context_data(**kwargs)
+        context['firstName'] = context['poll'].userPosted.first_name
+        context['lastName'] = context['poll'].userPosted.last_name
+        print(context)
+        return context
 
 class AddPostView(CreateView):
     model = Poll
