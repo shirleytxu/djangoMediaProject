@@ -12,7 +12,7 @@ class postDetailView(DetailView):
 
 class AddPostView(CreateView):
     model = Poll
-    template_name = 'createPost.html'
+    template_name = 'createPoll.html'
     fields = '__all__'
 
 def index(request):
@@ -77,7 +77,6 @@ def createPoll(request):
 
 # password = make_password(the password input value from the form)
 # def user
-
 
 """
 class myView(request):

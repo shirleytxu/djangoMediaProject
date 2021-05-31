@@ -1,22 +1,9 @@
-<!DOCTYPE html>
-<html>
 
-  <head>
-    <title>pollParty</title>
+<!-- Placeholder for now -->
+<h1>Create Poll</h1>
 
-      <!-- Copied from Dr. J's Twit -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-  </head>
-
-  <body>
-    <div class="container">
-        <!-- Placeholder for now -->
-        <h1>Create Poll</h1>
-
-    </div>
-  </body>
-</html>
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button>Post</button>
+</form>
