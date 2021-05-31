@@ -13,7 +13,7 @@ class postDetailView(DetailView):
 class AddPostView(CreateView):
     model = Poll
     template_name = 'createPoll.html'
-    fields = '__all__'
+    fields = ['pollText']
 
 def index(request):
     """

@@ -72,10 +72,14 @@
     <div class="container">
         <h1 style="color: #CEC9E6">pollParty</h1>
         <button class="button" onclick="location.href = '/createpoll/'" style="vertical-align:middle"><span>Create Poll</span></button>
-        <button class="button" onclick="location.href = '/accounts/login/'" style="vertical-align:middle"><span>Login</span></button>
-        <button class="button" onclick="location.href = '/accounts/logout/'" style="vertical-align:middle"><span>Logout</span></button><br/>
+
         <!--<a href="{% url 'createpoll' %}">Create Poll</a>-->
-        <p> Welcome <strong>{{request.user.username}}</strong>! </p>
+        {% if user.is_authenticated %}
+            <button class="button" onclick="location.href = '/accounts/logout/'" style="vertical-align:middle"><span>Logout</span></button><br/>
+            <p> Welcome <strong>{{request.user.username}}</strong>! </p>
+        {% else %}
+            <button class="button" onclick="location.href = '/accounts/login/'" style="vertical-align:middle"><span>Login</span></button>
+        {% endif %}
         {% for poll in allPolls %}
 
         <button class="buttonpost" onclick="location.href = '{% url 'postDetails' poll.pk %}'" style="text-align:left; color: #323B48; font-size: 16px" > {{ poll.firstName }} {{ poll.lastName }} <br/>

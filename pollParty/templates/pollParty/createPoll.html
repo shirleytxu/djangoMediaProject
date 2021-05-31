@@ -5,8 +5,8 @@
 <form method="POST">
   {% csrf_token %}
   {{ form.as_p }}
-  <button>Post</button>
+  <input type="submit" value="Save">
+</form>
 
 <button class="button" onclick="location.href = '/'" style="vertical-align:middle"><span>Back</span></button>
-</form>
 {% endblock %}
