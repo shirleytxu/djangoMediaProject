@@ -5,15 +5,23 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Poll
 from django.views.generic import DetailView, CreateView
+from datetime import datetime
 
-class postDetailView(DetailView):
+class PostDetailView(DetailView):
     model = Poll
-    template_name = 'pollParty/postDetails.html'
+    template_name = 'pollParty/pollDetails.html'
+
 
 class AddPostView(CreateView):
     model = Poll
-    template_name = 'createPoll.html'
+    template_name = 'pollParty/createPoll.html'
     fields = ['pollText']
+
+    def form_valid(self, form):
+        form.instance.userPosted = self.request.user
+        form.instance.pubDate = datetime.now()
+        return super(AddPostView, self).form_valid(form)
+
 
 def index(request):
     """

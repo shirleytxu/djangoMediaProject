@@ -2,11 +2,17 @@
 <!-- Placeholder for now -->
 <h1>Create Poll</h1>
 
-<form method="POST">
+ {% if user.is_authenticated %}
+    <form method="POST">
   {% csrf_token %}
   {{ form.as_p }}
   <input type="submit" value="Save">
-</form>
+    </form>
+ {% else %}
+     <p>Your account doesn't have access to this page. To proceed,
+       please login <a href="/accounts/login/"> here </a> with an account that has access.</p>
+
+  {% endif %}
 
 <button class="button" onclick="location.href = '/'" style="vertical-align:middle"><span>Back</span></button>
 {% endblock %}
