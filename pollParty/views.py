@@ -56,12 +56,12 @@ def index(request):
                'user': request.user, }
     return HttpResponse(template.render(context, request))
 
-
 def createPoll(request):
-    """
-    createPoll view- page for user user to create a new poll
+     
+    """createPoll view- page for user user to create a new poll
     loads template pollParty/createPoll.html (simple line of text for now)
     """
+
     if request.POST:
         newPoll = Poll(pollQuestion=request.POST['newPostText'],
                        userPosted=request.POST['userPosting'],
@@ -75,11 +75,12 @@ def createPoll(request):
     context = {}      # empty for now
     return HttpResponse(template.render(context, request))
 
+
+
 # password = make_password(the password input value from the form)
 # def user
 
-"""
-class myView(request):
+"""def myView(request):
     # Just from URL (Get, no data)
     def get(self, request):
         if request.method =="GET":

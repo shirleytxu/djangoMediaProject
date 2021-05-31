@@ -71,8 +71,9 @@
   <body>
     <div class="container">
         <h1 style="color: #CEC9E6">pollParty</h1>
-        <button class="button" onclick="location.href = '/createpoll/'" style="vertical-align:middle"><span>Create Poll</span></button><br/>
-
+        <p> Welcome {{request.user.username}}!  </p>
+        <button class="button" onclick="location.href = '/createpoll/'" style="vertical-align:middle"><span>Create Poll</span></button>
+        <button class="button" onclick="location.href = '/accounts/login/'" style="vertical-align:middle"><span>Login</span></button><br/>
         <!--<a href="{% url 'createpoll' %}">Create Poll</a>-->
         {% for poll in allPolls %}
 
