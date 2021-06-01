@@ -42,6 +42,13 @@
         </form>
     {% endif %}
 
+    {% if user == poll.userPosted %}
+        <form action="{% url 'deletepost' poll.pk %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete Post">
+        </form>
+    {% endif %}
+
 
 {% else %}
 <p>Please log in <a href="/accounts/login/"> here </a> with an account that has access to vote.</p>

@@ -49,6 +49,20 @@ def downvote(request, pk):
     poll.save()
     return HttpResponseRedirect(reverse('postDetails', args=(pk,)))
 
+
+def deletepost(request, pk):
+    user = request.user
+    poll = get_object_or_404(Poll, pk=pk)
+    if user == poll.userPosted:
+        postToDelete = Poll.objects.get(pk=pk)
+        postToDelete.delete()
+        message = "Poll %d deleted successfully." % pk
+    else:
+        message = "You do not have permission to delete."
+    context = {'message': message}
+    return render(request, 'pollParty/deletePoll.html', context)
+
+
 def index(request):
     """
     index view- home page of pollParty
