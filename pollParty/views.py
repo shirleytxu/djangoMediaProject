@@ -8,6 +8,32 @@ from django.views.generic import DetailView, CreateView
 from datetime import datetime
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+
+
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ["username", "email", "first_name", "last_name", "password1", "password2"]
+
+def register(response):
+    message=""
+    if response.method == "POST":
+        form = RegisterForm(response.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+        else:
+            message="Registration Form Failed. "
+
+    else:
+        form = RegisterForm()
+    return render(response, "registration/register.html", {"form": form, "message": message})
 
 class PostDetailView(DetailView):
     model = Poll
@@ -102,3 +128,4 @@ def index(request):
     context = {'allPolls': allPolls, 'loggedIn': loggedIn,
                'user': request.user, }
     return HttpResponse(template.render(context, request))
+

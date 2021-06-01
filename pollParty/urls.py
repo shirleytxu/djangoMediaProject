@@ -15,5 +15,5 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('upVote/<int:pk>/', views.upvote, name="upvote"),
     path('downVote/<int:pk>/', views.downvote, name="downvote"),
-
+    path('accounts/register/', views.register, name="register"),
 ]
