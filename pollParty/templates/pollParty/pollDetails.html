@@ -11,17 +11,18 @@
 
 </head>
 
-<!--style="background-image: url('djangobackground.gif');"-->
+<!--Displays this poll's details -->
 <body>
 <h1> {{ poll.pollText }} </h1>
 <small> By {{ firstName }} {{ lastName }} </small> <br/>
+<!-- Poll Up Votes -->
 <span> <small>👍 {% if poll.upVotes_set.exists %}
                                 {{ poll.upVotes_set }}
                          {% else %}
                                 0
                          {% endif %}
             </small>
-    <!-- Poll Down Votes -->
+        <!-- Poll Down Votes -->
         <span> <small>👎 {% if poll.downVotes_set.exists %}
                                 {{ poll.downVotes_set }}
                          {% else %}
@@ -33,6 +34,25 @@
 <br/>
 <hr>
 
+<!-- Vote -->
+{% if user.is_authenticated %}
+    <!-- Up Vote -->
+    <form action="{% url 'upvote' poll.pk %}" method="post">
+        {% csrf_token %}
+    <input type="submit" value="Up Vote (👍)">
+    </form>
+    <br />
+
+    <!-- Down Vote -->
+    <form action="{% url 'downvote' poll.pk %}" method="post">
+        {% csrf_token %}
+    <input type="submit" value="Down Vote (👎)">
+    </form>
+
+{% else %}
+<p>Please log in <a href="/accounts/login/"> here </a> with an account that has access to vote.</p>
+
+{% endif %}
 
 <a href="{% url 'index' %}">Back</a>
 

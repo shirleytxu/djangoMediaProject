@@ -70,26 +70,29 @@
 
 </head>
 
-<!--style="background-image: url('djangobackground.gif');"-->
 <body>
 <div class="container">
     <h1 style="color: #CEC9E6">pollParty</h1>
+    <!-- Create Poll -->
     <button class="button" onclick="location.href = '/createpoll/'"
             style="vertical-align:middle"><span>Create Poll</span></button>
 
-    <!--<a href="{% url 'createpoll' %}">Create Poll</a>-->
     {% if user.is_authenticated %}
+    <!-- Log Out Option given if user is authenticated -->
     <button class="button" onclick="location.href = '/accounts/logout/'"
             style="vertical-align:middle"><span>Logout</span></button>
     <br/>
+    <!-- Welcomes authenticated user -->
     <p> Welcome <strong>{{request.user.username}}</strong>! </p>
     {% else %}
+    <!-- Log In Option given if user is not authenticated -->
     <button class="button" onclick="location.href = '/accounts/login/'"
             style="vertical-align:middle"><span>Login</span></button>
     {% endif %}
 
 
     {% for poll in allPolls %}
+    <!-- Displays all posts, linked to individual detail pages -->
     <button class="buttonpost"
             onclick="location.href = '{% url 'postDetails' poll.pk %}'"
             style="text-align:left; color: #323B48; font-size: 16px">
@@ -97,13 +100,15 @@
         <span> {{ poll.pubDate }}:</span> <br/>
         <span style="text-align:center; font-size: 20px;"> {{ poll.pollText }} <br/>
             </span>
+        <!-- Poll Up Votes -->
         <span> <small>👍 {% if poll.upVotes_set.exists %}
                                 {{ poll.upVotes_set }}
                          {% else %}
                                 0
                          {% endif %}
             </small>
-            <!-- Poll Down Votes -->
+
+        <!-- Poll Down Votes -->
         <span> <small>👎 {% if poll.downVotes_set.exists %}
                                 {{ poll.downVotes_set }}
                          {% else %}

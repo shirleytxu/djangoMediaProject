@@ -28,3 +28,10 @@ class Poll(models.Model):
 
     # List of Users that Down Voted this Poll
     downVotes = models.ManyToManyField(User, related_name="userDownvotedPolls")
+
+    def __str__(self):
+        print(self.pk)
+        print(self.pollText)
+        print(self.upVotes)
+        print(self.downVotes)
+        return "poll %d, pollText:'%s'" % (self.pk, self.pollText)

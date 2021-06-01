@@ -3,12 +3,14 @@
 <h1>Create Poll</h1>
 
  {% if user.is_authenticated %}
+    <!-- User is authenticated, create post shown -->
     <form method="POST">
   {% csrf_token %}
   {{ form.as_p }}
   <input type="submit" value="Save">
     </form>
  {% else %}
+    <!-- User is not authenticated, redirect to login page -->
      <p>Your account doesn't have access to this page. To proceed,
        please login <a href="/accounts/login/"> here </a> with an account that has access.</p>
 

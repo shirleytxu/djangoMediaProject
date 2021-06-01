@@ -6,7 +6,7 @@ from django.template import loader
 from .models import Poll
 from django.views.generic import DetailView, CreateView
 from datetime import datetime
-
+from django.shortcuts import get_object_or_404
 
 class PostDetailView(DetailView):
     model = Poll
@@ -32,10 +32,18 @@ class AddPostView(CreateView):
 
 
 def upvote(request, pk):
+    user = request.user
+    poll = get_object_or_404(Poll, pk=pk)
+
+    print("upvote:", user, poll.upVotes)
+    poll.upVotes.add(user)
+    poll.save()
     return HttpResponse("Upvoted %d" % pk)
 
 
 def downvote(request, pk):
+    user = request.user
+    poll = get_object_or_404(Poll, pk)
     return HttpResponse("Downvoted %d" % pk)
 
 def index(request):

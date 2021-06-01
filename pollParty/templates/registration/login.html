@@ -1,18 +1,11 @@
 {% block content %}
 
+<!-- User entered in username and/or password incorrectly -->
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
 
-{% if next %}
-{% if user.is_authenticated %}
-<p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-{% else %}
-<p><a href="/login"> Please login to view this page. </a></p>
-{% endif %}
-{% endif %}
-
+<!-- User Log In form -->
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     <table>
@@ -25,14 +18,16 @@
             <td>{{ form.password }}</td>
         </tr>
     </table>
-    <p>Don't have an account? Create one <a href="/register">HERE </a></p>
+    <!-- Provides way for people to register -->
+    <p>Don't have an account? Create one <a href="accounts/register/"> here </a></p>
 
     <input type="submit" value="Login"/>
     <input type="hidden" name="next" value="{{ next }}"/>
 </form>
 
-{# Assumes you setup the password_reset view in your URLconf #}
+<!-- Provides way to reset password -->
 <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
 <button class="button" onclick="location.href = '/'"
         style="vertical-align:middle">
     <span>Home</span>
