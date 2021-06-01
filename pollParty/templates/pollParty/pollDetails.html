@@ -16,21 +16,10 @@
 <h1> {{ poll.pollText }} </h1>
 <small> By {{ firstName }} {{ lastName }} </small> <br/>
 <!-- Poll Up Votes -->
-<span> <small>👍 {% if poll.upVotes_set.exists %}
-                                {{ poll.upVotes_set }}
-                         {% else %}
-                                0
-                         {% endif %}
-            </small>
-        <!-- Poll Down Votes -->
-        <span> <small>👎 {% if poll.downVotes_set.exists %}
-                                {{ poll.downVotes_set }}
-                         {% else %}
-                                0
-                         {% endif %}
-            </small>
-        </span>
-</span>
+<span> <small>👍 {{ poll.upVotes.count }}</small></span>
+
+<!-- Poll Down Votes -->
+<span> <small>👎 {{ poll.downVotes.count }}</small></span>
 <br/>
 <hr>
 

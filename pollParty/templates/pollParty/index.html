@@ -101,22 +101,10 @@
         <span style="text-align:center; font-size: 20px;"> {{ poll.pollText }} <br/>
             </span>
         <!-- Poll Up Votes -->
-        <span> <small>👍 {% if poll.upVotes_set.exists %}
-                                {{ poll.upVotes_set }}
-                         {% else %}
-                                0
-                         {% endif %}
-            </small>
+        <span> <small>👍 {{ poll.upVotes.count }}</small></span>
 
         <!-- Poll Down Votes -->
-        <span> <small>👎 {% if poll.downVotes_set.exists %}
-                                {{ poll.downVotes_set }}
-                         {% else %}
-                                0
-                         {% endif %}
-            </small>
-        </span>
-        </span>
+        <span> <small>👎 {{ poll.downVotes.count }}</small></span>
     </button>
     {% endfor %}
 
