@@ -7,6 +7,7 @@ from .models import Poll
 from django.views.generic import DetailView, CreateView
 from datetime import datetime
 
+
 class PostDetailView(DetailView):
     model = Poll
     template_name = 'pollParty/pollDetails.html'
@@ -18,6 +19,7 @@ class PostDetailView(DetailView):
         print(context)
         return context
 
+
 class AddPostView(CreateView):
     model = Poll
     template_name = 'pollParty/createPoll.html'
@@ -28,6 +30,13 @@ class AddPostView(CreateView):
         form.instance.pubDate = datetime.now()
         return super(AddPostView, self).form_valid(form)
 
+
+def upvote(request, pk):
+    return HttpResponse("Upvoted %d" % pk)
+
+
+def downvote(request, pk):
+    return HttpResponse("Downvoted %d" % pk)
 
 def index(request):
     """
@@ -64,7 +73,6 @@ def index(request):
         poster = poll.userPosted
         poll.firstName = poster.first_name
         poll.lastName = poster.last_name
-
     # Prepares Context for Template Rendering
     context = {'allPolls': allPolls, 'loggedIn': loggedIn,
                'user': request.user, }

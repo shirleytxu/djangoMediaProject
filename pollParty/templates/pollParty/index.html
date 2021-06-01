@@ -55,43 +55,66 @@
 }
 
 .buttonpost:hover {opacity: 1}
+
+
 </style>
-  <head>
+<head>
     <title>pollParty</title>
 
-      <!-- Copied from Dr. J's Twit -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- Copied from Dr. J's Twit -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-  </head>
+</head>
 
 <!--style="background-image: url('djangobackground.gif');"-->
-  <body>
-    <div class="container">
-        <h1 style="color: #CEC9E6">pollParty</h1>
-        <button class="button" onclick="location.href = '/createpoll/'" style="vertical-align:middle"><span>Create Poll</span></button>
+<body>
+<div class="container">
+    <h1 style="color: #CEC9E6">pollParty</h1>
+    <button class="button" onclick="location.href = '/createpoll/'"
+            style="vertical-align:middle"><span>Create Poll</span></button>
 
-        <!--<a href="{% url 'createpoll' %}">Create Poll</a>-->
-        {% if user.is_authenticated %}
-            <button class="button" onclick="location.href = '/accounts/logout/'" style="vertical-align:middle"><span>Logout</span></button><br/>
-            <p> Welcome <strong>{{request.user.username}}</strong>! </p>
-        {% else %}
-            <button class="button" onclick="location.href = '/accounts/login/'" style="vertical-align:middle"><span>Login</span></button>
-        {% endif %}
-        {% for poll in allPolls %}
+    <!--<a href="{% url 'createpoll' %}">Create Poll</a>-->
+    {% if user.is_authenticated %}
+    <button class="button" onclick="location.href = '/accounts/logout/'"
+            style="vertical-align:middle"><span>Logout</span></button>
+    <br/>
+    <p> Welcome <strong>{{request.user.username}}</strong>! </p>
+    {% else %}
+    <button class="button" onclick="location.href = '/accounts/login/'"
+            style="vertical-align:middle"><span>Login</span></button>
+    {% endif %}
 
-        <button class="buttonpost" onclick="location.href = '{% url 'postDetails' poll.pk %}'" style="text-align:left; color: #323B48; font-size: 16px" > {{ poll.firstName }} {{ poll.lastName }} <br/>
-            <span> {{ poll.pubDate }}:</span> <br/>
-            <span style="text-align:center; font-size: 20px;"> {{ poll.pollText }} <br/>
+
+    {% for poll in allPolls %}
+    <button class="buttonpost"
+            onclick="location.href = '{% url 'postDetails' poll.pk %}'"
+            style="text-align:left; color: #323B48; font-size: 16px">
+        {{ poll.firstName }} {{ poll.lastName }} <br/>
+        <span> {{ poll.pubDate }}:</span> <br/>
+        <span style="text-align:center; font-size: 20px;"> {{ poll.pollText }} <br/>
             </span>
-            <span> <small>👍 {{ poll.upVotes }}</small>
+        <span> <small>👍 {% if poll.upVotes_set.exists %}
+                                {{ poll.upVotes_set }}
+                         {% else %}
+                                0
+                         {% endif %}
+            </small>
             <!-- Poll Down Votes -->
-            <small>👎 {{ poll.downVotes }}</small> </span>
-        </button>
-        {% endfor %}
+        <span> <small>👎 {% if poll.downVotes_set.exists %}
+                                {{ poll.downVotes_set }}
+                         {% else %}
+                                0
+                         {% endif %}
+            </small>
+        </span>
+        </span>
+    </button>
+    {% endfor %}
 
-    </div>
-  </body>
+</div>
+</body>
 </html>

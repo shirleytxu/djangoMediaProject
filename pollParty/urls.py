@@ -12,5 +12,6 @@ urlpatterns = [
     path('createpoll/', views.AddPostView.as_view(success_url="/"), name="createpoll"),
     path('postDetails/<int:pk>', views.PostDetailView.as_view(), name="postDetails"),
     path('accounts/', include('django.contrib.auth.urls')),
-
+    path('upVote/<int:pk>/', views.upvote, name="upvote"),
+    path('downVote/<int:pk>/', views.downvote, name="downvote"),
 ]
