@@ -1,12 +1,13 @@
 from django.utils import timezone
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import Poll
 from django.views.generic import DetailView, CreateView
 from datetime import datetime
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 
 class PostDetailView(DetailView):
     model = Poll
@@ -37,7 +38,7 @@ def upvote(request, pk):
 
     poll.upVotes.add(user)
     poll.save()
-    return HttpResponse("Upvoted %d" % pk)
+    return HttpResponseRedirect(reverse('postDetails', args=(pk,)))
 
 
 def downvote(request, pk):
@@ -46,7 +47,7 @@ def downvote(request, pk):
 
     poll.downVotes.add(user)
     poll.save()
-    return HttpResponse("Downvoted %d" % pk)
+    return HttpResponseRedirect(reverse('postDetails', args=(pk,)))
 
 def index(request):
     """
