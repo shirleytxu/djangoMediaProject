@@ -26,17 +26,22 @@
 <!-- Vote -->
 {% if user.is_authenticated %}
     <!-- Up Vote -->
-    <form action="{% url 'upvote' poll.pk %}" method="post">
-        {% csrf_token %}
-    <input type="submit" value="Up Vote (👍)">
-    </form>
-    <br />
+    {% if user in poll.upVotes.all or user in poll.downVotes.all %}
+        <p> You have already voted. </p>
+    {% else %}
+        <form action="{% url 'upvote' poll.pk %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Up Vote (👍)">
+        </form>
+        <br />
 
-    <!-- Down Vote -->
-    <form action="{% url 'downvote' poll.pk %}" method="post">
-        {% csrf_token %}
-    <input type="submit" value="Down Vote (👎)">
-    </form>
+        <!-- Down Vote -->
+        <form action="{% url 'downvote' poll.pk %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Down Vote (👎)">
+        </form>
+    {% endif %}
+
 
 {% else %}
 <p>Please log in <a href="/accounts/login/"> here </a> with an account that has access to vote.</p>
