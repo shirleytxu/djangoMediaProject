@@ -35,7 +35,7 @@
         {% if user == poll.userPosted %}
             <form action="{% url 'deletepost' poll.pk %}" method="post">
                 {% csrf_token %}
-                <input type="submit" value="Delete Post">
+                <br/><input type="submit" value="Delete Post">
             </form>
         {% endif %}
     {% else %}
