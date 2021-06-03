@@ -1,45 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
+{% extends 'pollParty/base.html' %}
+{% block title %}Log In{% endblock %}
 {% block content %}
-
 <!-- User entered in username and/or password incorrectly -->
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
-
+<br/>
 <!-- User Log In form -->
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     <table>
         <tr>
-            <td>{{ form.username.label_tag }}</td>
+            <td style="color: #AA828B;">{{ form.username.label_tag }}</td>
             <td>{{ form.username }}</td>
         </tr>
         <tr>
-            <td>{{ form.password.label_tag }}</td>
+            <td style="color: #AA828B;">{{ form.password.label_tag }}</td>
             <td>{{ form.password }}</td>
         </tr>
     </table>
     <!-- Provides way for people to register -->
-    <p>Don't have an account? Create one <a href="/accounts/register/"> here </a></p>
+    <p style="color: #AA828B;">Don't have an account? Create one <a href="/accounts/register/" style="color: #CCA3A9"> here </a></p>
 
-    <input type="submit" value="Login"/>
+
+    <input type="submit" style="button; margin-right: 8px; margin-left: 30px;" value="Login"/>  <!-- Provides way to reset password -->
+    <a href="{% url 'password_reset' %}" style="color: #CCA3A9">Lost password?</a>
     <input type="hidden" name="next" value="{{ next }}"/>
 </form>
 
-<!-- Provides way to reset password -->
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-
-<button class="button" onclick="location.href = '/'"
-        style="vertical-align:middle">
-    <span>Home</span>
-</button>
 {% endblock %}
-
-</body>
-</html>

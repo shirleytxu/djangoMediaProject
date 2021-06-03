@@ -1,93 +1,27 @@
-<!DOCTYPE html>
-<html>
-<style>
-.button {
-    display: inline-block;
-    border-radius: 4px;
-    background-color: #B6BFCC;
-    border: none;
-    color: #E5DCE0;
-    text-align: center;
-    font-size: 28px;
-    width: 200px;
-    transition: all 0.5s;
-    cursor: pointer;
-    margin: 5px;
-}
-
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.button:hover span {
-  padding-right: 25px;
-}
-
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-
-.buttonpost {
-  border-radius: 25px;
-  border: 2px solid #DFC5BC;
-  padding: 20px;
-  width: 850px;
-  height: 150px;
-  opacity: 0.6;
-  transition: 0.3s;
-  display: inline-block;
-  text-decoration: none;
-  margin: 5px 2px;
-  cursor: pointer;
-}
-
-.buttonpost:hover {opacity: 1}
-
-
-</style>
-<head>
-    <title>pollParty</title>
-
-    <!-- Copied from Dr. J's Twit -->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-</head>
-
-<body>
+{% extends 'pollParty/base.html' %}
+{% block title %}Poll Party {% endblock %}
+{% block content %}
 <div class="container">
-    <h1 style="color: #CEC9E6">pollParty</h1>
+    <h1 style="color: #FFE2E5">pollParty</h1>
+
+    {% if user.is_authenticated %}
+    <!-- Welcomes authenticated user -->
+    <p  style="color: #FFE2E5"> Welcome back, <strong>{{request.user.username}}</strong>! </p>
+
     <!-- Create Poll -->
     <button class="button" onclick="location.href = '/createpoll/'"
             style="vertical-align:middle"><span>Create Poll</span></button>
 
-    {% if user.is_authenticated %}
     <!-- Log Out Option given if user is authenticated -->
     <button class="button" onclick="location.href = '/accounts/logout/'"
             style="vertical-align:middle"><span>Logout</span></button>
-    <br/>
-    <!-- Welcomes authenticated user -->
-    <p> Welcome <strong>{{request.user.username}}</strong>! </p>
+
     {% else %}
     <!-- Log In Option given if user is not authenticated -->
     <button class="button" onclick="location.href = '/accounts/login/'"
             style="vertical-align:middle"><span>Login</span></button>
+    <button class="button" onclick="location.href = '/accounts/register/'"
+            style="vertical-align:middle"><span>Register</span></button>
     {% endif %}
 
 
@@ -95,7 +29,7 @@
     <!-- Displays all posts, linked to individual detail pages -->
     <button class="buttonpost"
             onclick="location.href = '{% url 'postDetails' poll.pk %}'"
-            style="text-align:left; color: #323B48; font-size: 16px">
+            style="text-align:left; color: #452F3A; font-size: 16px">
         {{ poll.firstName }} {{ poll.lastName }} <br/>
         <span> {{ poll.pubDate }}:</span> <br/>
         <span style="text-align:center; font-size: 20px;"> {{ poll.pollText }} <br/>
@@ -109,5 +43,5 @@
     {% endfor %}
 
 </div>
-</body>
-</html>
+
+{% endblock %}

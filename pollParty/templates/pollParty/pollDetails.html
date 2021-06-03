@@ -1,25 +1,15 @@
-<!DOCTYPE html>
-<head>
-    <title>pollParty</title>
+{% extends 'pollParty/base.html' %}
+{% block title %}View Poll Details{% endblock %}
+{% block content %}
 
-    <!-- Copied from Dr. J's Twit -->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-</head>
-
-<!--Displays this poll's details -->
-<body>
+<br/>
 <h1> {{ poll.pollText }} </h1>
-<small> By {{ firstName }} {{ lastName }} </small> <br/>
+<small style="color: #AA828B; margin-right: 8px; margin-left: 30px;"> By {{ firstName }} {{ lastName }} </small> <br/>
 <!-- Poll Up Votes -->
-<span> <small>👍 {{ poll.upVotes.count }}</small></span>
+<span> <small style="color: #AA828B; margin-right: 8px; margin-left: 30px;">👍 {{ poll.upVotes.count }}</small></span>
 
 <!-- Poll Down Votes -->
-<span> <small>👎 {{ poll.downVotes.count }}</small></span>
+<span> <small style="color: #AA828B; margin-right: 8px; ">👎 {{ poll.downVotes.count }}</small></span>
 <br/>
 <hr>
 
@@ -42,6 +32,7 @@
         </form>
     {% endif %}
 
+    <!-- If user is the author of a post, displays delete post option -->
     {% if user == poll.userPosted %}
         <form action="{% url 'deletepost' poll.pk %}" method="post">
             {% csrf_token %}
@@ -51,9 +42,12 @@
 
 
 {% else %}
-<p>Please log in <a href="/accounts/login/"> here </a> with an account that has access to vote.</p>
+<!-- User is not logged in, prompts them to log in -->
+<p style="color: #AA828B;">Please log in <a href="/accounts/login/"> here </a>
+    with an account that has access to vote.</p>
 
 {% endif %}
-
-<a href="{% url 'index' %}">Back</a>
-
+<br/>
+ <button class="button" onclick="location.href = '/'"
+            style="vertical-align:middle"><span>Go Home</span></button>
+{% endblock %}

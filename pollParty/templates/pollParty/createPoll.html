@@ -1,3 +1,5 @@
+{% extends 'pollParty/base.html' %}
+{% block title %}Create A Poll {% endblock %}
 {% block content %}
 <!-- Placeholder for now -->
 <h1>Create Poll</h1>
@@ -7,7 +9,7 @@
     <form method="POST">
   {% csrf_token %}
   {{ form.as_p }}
-  <input type="submit" value="Save">
+  <input type="submit" style="margin-right: 8px; margin-left: 30px;" value="Save">
     </form>
  {% else %}
     <!-- User is not authenticated, redirect to login page -->
@@ -15,6 +17,6 @@
        please login <a href="/accounts/login/"> here </a> with an account that has access.</p>
 
   {% endif %}
-
+<br/>
 <button class="button" onclick="location.href = '/'" style="vertical-align:middle"><span>Back</span></button>
 {% endblock %}
