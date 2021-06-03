@@ -2,16 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    bio = models.TextField()
-
-    def __str__(self):
-        return str(self.user)
-
-
 class Poll(models.Model):
-    # Model for Poll
+    """
+    Model for Poll Class
+    """
 
     # Text Description for each Poll
     pollText = models.CharField(max_length=300)
@@ -35,8 +29,4 @@ class Poll(models.Model):
     downVotes = models.ManyToManyField(User, related_name="userDownvotedPolls")
 
     def __str__(self):
-        print(self.pk)
-        print(self.pollText)
-        print(self.upVotes)
-        print(self.downVotes)
         return "poll %d, pollText:'%s'" % (self.pk, self.pollText)

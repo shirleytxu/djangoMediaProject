@@ -5,43 +5,42 @@
     <h1 style="color: #FFE2E5">pollParty</h1>
 
     {% if user.is_authenticated %}
-    <!-- Welcomes authenticated user -->
-    <p  style="color: #FFE2E5"> Welcome back, <strong>{{request.user.username}}</strong>! </p>
+        <!-- Welcomes authenticated user -->
+        <p style="color: #FFE2E5"> Welcome back,
+            <strong>{{request.user.username}}</strong>! </p>
 
-    <!-- Create Poll -->
-    <button class="button" onclick="location.href = '/createpoll/'"
-            style="vertical-align:middle"><span>Create Poll</span></button>
+        <!-- Create Poll -->
+        <button class="button" onclick="location.href = '/createpoll/'"
+                style="vertical-align:middle"><span>Create Poll</span></button>
 
-    <!-- Log Out Option given if user is authenticated -->
-    <button class="button" onclick="location.href = '/accounts/logout/'"
-            style="vertical-align:middle"><span>Logout</span></button>
+        <!-- Log Out Option given if user is authenticated -->
+        <button class="button" onclick="location.href = '/accounts/logout/'"
+                style="vertical-align:middle"><span>Logout</span></button>
 
     {% else %}
-    <!-- Log In Option given if user is not authenticated -->
-    <button class="button" onclick="location.href = '/accounts/login/'"
-            style="vertical-align:middle"><span>Login</span></button>
-    <button class="button" onclick="location.href = '/accounts/register/'"
-            style="vertical-align:middle"><span>Register</span></button>
+        <!-- Log In Option given if user is not authenticated -->
+        <button class="button" onclick="location.href = '/accounts/login/'"
+                style="vertical-align:middle"><span>Login</span></button>
+        <button class="button" onclick="location.href = '/accounts/register/'"
+                style="vertical-align:middle"><span>Register</span></button>
     {% endif %}
 
-
     {% for poll in allPolls %}
-    <!-- Displays all posts, linked to individual detail pages -->
-    <button class="buttonpost"
-            onclick="location.href = '{% url 'postDetails' poll.pk %}'"
-            style="text-align:left; color: #452F3A; font-size: 16px">
-        {{ poll.firstName }} {{ poll.lastName }} <br/>
-        <span> {{ poll.pubDate }}:</span> <br/>
-        <span style="text-align:center; font-size: 20px;"> {{ poll.pollText }} <br/>
-            </span>
-        <!-- Poll Up Votes -->
-        <span> <small>👍 {{ poll.upVotes.count }}</small></span>
+        <!-- Displays all posts, linked to individual detail pages -->
+        <button class="buttonpost"
+                onclick="location.href = '{% url 'postDetails' poll.pk %}'"
+                style="text-align:left; color: #452F3A; font-size: 16px">
+            {{ poll.firstName }} {{ poll.lastName }} <br/>
+            <span> {{ poll.pubDate }}:</span> <br/>
+            <span style="text-align:center; font-size: 20px;"> {{ poll.pollText }} <br/>
+                </span>
+            <!-- Poll Up Votes -->
+            <span> <small>👍 {{ poll.upVotes.count }}</small></span>
 
-        <!-- Poll Down Votes -->
-        <span> <small>👎 {{ poll.downVotes.count }}</small></span>
-    </button>
+            <!-- Poll Down Votes -->
+            <span> <small>👎 {{ poll.downVotes.count }}</small></span>
+        </button>
     {% endfor %}
-
 </div>
 
 {% endblock %}

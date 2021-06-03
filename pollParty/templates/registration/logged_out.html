@@ -1,13 +1,12 @@
 {% extends 'pollParty/base.html' %}
 {% block title %}Log Out{% endblock %}
 {% block content %}
-  <!-- Logs user out, directed to Log In page -->
-  </br><h1>Logged out!</h1>
-<p><a href="{% url 'login'%}" >Click here to login again.</a></p>
+    <!-- Logs user out, directed to Log In page -->
+    </br>
+    <h1>Logged out!</h1>
+    <p><a href="{% url 'login'%}">Click here to login again.</a></p>
 
-<button class="button" onclick="location.href = '/'"
-        style="vertical-align:middle"><span>Go Home </span>
-</button>
-
-
+    <button class="button" onclick="location.href = '/'"
+            style="vertical-align:middle"><span>Go Home </span>
+    </button>
 {% endblock %}

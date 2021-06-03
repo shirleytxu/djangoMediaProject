@@ -1,9 +1,8 @@
 {% extends 'pollParty/base.html' %}
 {% block title %}Delete Poll {% endblock %}
 {% block content %}
-<!-- Notifies user post deletion successful -->
-<p> {{ message }} </p>
-<button class="button" onclick="location.href = '/'" style="vertical-align:middle"><span>Go Home</span></button>
-
-
+    <!-- Notifies user result of post deletion -->
+    <p> {{ message }} </p>
+    <button class="button" onclick="location.href = '/'"
+            style="vertical-align:middle"><span>Go Home</span></button>
 {% endblock %}

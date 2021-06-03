@@ -1,22 +1,23 @@
 {% extends 'pollParty/base.html' %}
 {% block title %}Create A Poll {% endblock %}
 {% block content %}
-<!-- Placeholder for now -->
-<h1>Create Poll</h1>
+    <h1>Create Poll</h1>
 
- {% if user.is_authenticated %}
-    <!-- User is authenticated, create post shown -->
-    <form method="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" style="margin-right: 8px; margin-left: 30px;" value="Save">
-    </form>
- {% else %}
-    <!-- User is not authenticated, redirect to login page -->
-     <p>Your account doesn't have access to this page. To proceed,
-       please login <a href="/accounts/login/"> here </a> with an account that has access.</p>
-
-  {% endif %}
-<br/>
-<button class="button" onclick="location.href = '/'" style="vertical-align:middle"><span>Back</span></button>
+    {% if user.is_authenticated %}
+        <!-- User is authenticated, create post shown -->
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input style="margin-right: 8px; margin-left: 30px;" type="submit"
+                   value="Save">
+        </form>
+    {% else %}
+        <!-- User is not authenticated, redirect to login page -->
+        <p>Your account doesn't have access to this page. To proceed,
+            please login <a href="/accounts/login/"> here </a> with an account that has
+            access.</p>
+    {% endif %}
+    <br/>
+    <button class="button" onclick="location.href = '/'"
+            style="vertical-align:middle"><span>Back</span></button>
 {% endblock %}

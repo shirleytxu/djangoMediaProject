@@ -1,53 +1,50 @@
 {% extends 'pollParty/base.html' %}
 {% block title %}View Poll Details{% endblock %}
 {% block content %}
+    <br/>
+    <h1> {{ poll.pollText }} </h1>
+    <small style="color: #AA828B; margin-right: 8px; margin-left: 30px;"> By {{ firstName }} {{ lastName }} </small> <br/>
+    <!-- Poll Up Votes -->
+    <span> <small style="color: #AA828B; margin-right: 8px; margin-left: 30px;">👍 {{ poll.upVotes.count }}</small></span>
 
-<br/>
-<h1> {{ poll.pollText }} </h1>
-<small style="color: #AA828B; margin-right: 8px; margin-left: 30px;"> By {{ firstName }} {{ lastName }} </small> <br/>
-<!-- Poll Up Votes -->
-<span> <small style="color: #AA828B; margin-right: 8px; margin-left: 30px;">👍 {{ poll.upVotes.count }}</small></span>
+    <!-- Poll Down Votes -->
+    <span> <small style="color: #AA828B; margin-right: 8px; ">👎 {{ poll.downVotes.count }}</small></span>
+    <br/>
+    <hr>
 
-<!-- Poll Down Votes -->
-<span> <small style="color: #AA828B; margin-right: 8px; ">👎 {{ poll.downVotes.count }}</small></span>
-<br/>
-<hr>
+    <!-- Vote -->
+    {% if user.is_authenticated %}
+        <!-- Up Vote -->
+        {% if user in poll.upVotes.all or user in poll.downVotes.all %}
+            <p> You have already voted. </p>
+        {% else %}
+            <form action="{% url 'upvote' poll.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Up Vote (👍)">
+            </form>
+            <br/>
 
-<!-- Vote -->
-{% if user.is_authenticated %}
-    <!-- Up Vote -->
-    {% if user in poll.upVotes.all or user in poll.downVotes.all %}
-        <p> You have already voted. </p>
+            <!-- Down Vote -->
+            <form action="{% url 'downvote' poll.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Down Vote (👎)">
+            </form>
+        {% endif %}
+
+        <!-- If user is the author of a post, displays delete post option -->
+        {% if user == poll.userPosted %}
+            <form action="{% url 'deletepost' poll.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Delete Post">
+            </form>
+        {% endif %}
     {% else %}
-        <form action="{% url 'upvote' poll.pk %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Up Vote (👍)">
-        </form>
-        <br />
-
-        <!-- Down Vote -->
-        <form action="{% url 'downvote' poll.pk %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Down Vote (👎)">
-        </form>
+        <!-- User is not logged in, prompts them to log in -->
+        <p style="color: #AA828B;">Please log in <a href="/accounts/login/"> here </a>
+            with an account that has access to vote.</p>
     {% endif %}
 
-    <!-- If user is the author of a post, displays delete post option -->
-    {% if user == poll.userPosted %}
-        <form action="{% url 'deletepost' poll.pk %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Delete Post">
-        </form>
-    {% endif %}
-
-
-{% else %}
-<!-- User is not logged in, prompts them to log in -->
-<p style="color: #AA828B;">Please log in <a href="/accounts/login/"> here </a>
-    with an account that has access to vote.</p>
-
-{% endif %}
-<br/>
- <button class="button" onclick="location.href = '/'"
+    <br/>
+    <button class="button" onclick="location.href = '/'"
             style="vertical-align:middle"><span>Go Home</span></button>
 {% endblock %}

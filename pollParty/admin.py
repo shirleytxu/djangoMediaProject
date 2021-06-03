@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from .models import Poll, Profile
+from .models import Poll
 
 admin.site.register(Poll)
-admin.site.register(Profile)
