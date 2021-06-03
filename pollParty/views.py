@@ -3,14 +3,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import Poll
 from django.views.generic import DetailView, CreateView
-from datetime import datetime
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-
+from django.utils import timezone
 
 class RegisterForm(UserCreationForm):
     """
@@ -83,7 +82,7 @@ class AddPostView(CreateView):
         form.instance.userPosted = self.request.user
 
         # Set current date and time as post timestamp
-        form.instance.pubDate = datetime.now()
+        form.instance.pubDate = timezone.now()
         return super(AddPostView, self).form_valid(form)
 
 
