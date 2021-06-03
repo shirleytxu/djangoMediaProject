@@ -2,6 +2,7 @@
 
 - Django Project Name: djangoMediaProject 
 - Django App Name: pollParty
+- Please look at latest commit 
 - Extra: 
      - Template Extensions 
      - Allowing a new user to register through a form 
