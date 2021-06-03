@@ -97,11 +97,12 @@ def upvote(request, pk):
     user = request.user
     poll = get_object_or_404(Poll, pk=pk)
 
-    # Adds user to list of users that upvoted this post
-    poll.upVotes.add(user)
-
-    # Update poll
-    poll.save()
+    # Prevents users from voting if they have already voted.
+    if user not in poll.upVotes.all() and user not in poll.downVotes.all():
+        # Adds user to list of users that upvoted this post
+        poll.upVotes.add(user)
+        # Update poll
+        poll.save()
 
     # Send user back to post detail page after upvote
     return HttpResponseRedirect(reverse('postDetails', args=(pk,)))
@@ -118,11 +119,13 @@ def downvote(request, pk):
     user = request.user
     poll = get_object_or_404(Poll, pk=pk)
 
-    # Adds user to list of users that downvoted this post
-    poll.downVotes.add(user)
+    # Prevents users from voting if they have already voted.
+    if user not in poll.upVotes.all() and user not in poll.downVotes.all():
+        # Adds user to list of users that downvoted this post
+        poll.downVotes.add(user)
 
-    # Update poll
-    poll.save()
+        # Update poll
+        poll.save()
 
     # Send user back to post detail page after downvote
     return HttpResponseRedirect(reverse('postDetails', args=(pk,)))
