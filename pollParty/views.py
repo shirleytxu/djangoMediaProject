@@ -26,11 +26,6 @@ class RegisterForm(UserCreationForm):
 
 
 def register(response):
-    """
-    register view-
-    allows new users to register an account
-    loads template registration/register.html
-    """
     message = ""
     if response.method == "POST":
         form = RegisterForm(response.POST)
